@@ -259,10 +259,13 @@
             }, [mode, currentCardIndex, shuffledCards.length, autoModeInterval]);
 
             const speakCardName = (cardName) => {
-                if (synth && cardName) {
-                    const utterance = new SpeechSynthesisUtterance(cardName.replace('-', ' '));
-                    utterance.lang = 'es-ES';
-                    synth.speak(utterance);
+                if (synth) {
+                    synth.cancel();
+                    if (cardName) {
+                        const utterance = new SpeechSynthesisUtterance(cardName.replace('-', ' '));
+                        utterance.lang = 'es-ES';
+                        synth.speak(utterance);
+                    }
                 }
             };
 
